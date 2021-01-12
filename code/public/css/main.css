@@ -1,0 +1,8 @@
+
+body{ scroll-behavior: smooth; }
+.form-row{ margin-bottom:15px;}
+.gold{ background-color:#dda145;}
+.gold-text{color:#dda145;}
+.scrollBar{overflow:auto; height:225px;}
+.largerOnPhones{min-height:54px;height:10vh;}
+.menu{transform:scale(2.0,2.0);}
