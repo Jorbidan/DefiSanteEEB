@@ -1,18 +1,17 @@
-# CanadaRun
-CanadaRun EEB
+# défi santé EEB
 /***********************************************************/
 Script fait pour MySQL WorkBench
 	voir dossier JMerise
 /***********************************************************/
 WAMP v-host
 <VirtualHost *:80>
-	ServerName canadaRun.eeb.ca
-	DocumentRoot "${INSTALL_DIR}/www/CanadaRun/Code/"
+	ServerName defisante.eeb.ca
+	DocumentRoot "${INSTALL_DIR}/www/DefiSanteEEB/Code/"
 	RewriteEngine on
- 	RewriteCond %{HTTP_HOST} ^canadaRun.eeb.ca
+ 	RewriteCond %{HTTP_HOST} ^defisante.eeb.ca
 	RewriteCond %{REQUEST_URI} !^/public/.* [NC]	
 	RewriteRule ^([a-zA-Z0-9\-\_\/\.%]*)$ /application/index.php?p=$1
-	<Directory  "${INSTALL_DIR}/www/CanadaRun/Code">
+	<Directory  "${INSTALL_DIR}/www/DefiSanteEEB/Code">
 		Options +Indexes +Includes +FollowSymLinks +MultiViews
 		AllowOverride All
 		Require local
@@ -20,6 +19,6 @@ WAMP v-host
 </VirtualHost>
 /***********************************************************/
 WINDOWS hosts
-127.0.0.1 canadaRun.eeb.ca
-::canadaRun.eeb.ca
+127.0.0.1 defisante.eeb.ca
+::defisante.eeb.ca
 /***********************************************************/
