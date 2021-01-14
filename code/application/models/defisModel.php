@@ -2,40 +2,43 @@
     require_once(PATH_CORE."/dbModel.php");
     require_once(PATH_DTO."/cohorteDTO.php");
     require_once(PATH_DTO."/defisDTO.php");
+    require_once(PATH_DTO."/athleteDTO.php");
+
 
     class DefisModel extends dbModel
     {
-        const GET_ALL_COHORTES = "get_all_cohortes";
-        const GET_DEFI_FOR_COHORTE = "get_defi_for_cohorte";
+        const GET_ALL_COHORTES_PROC = "get_all_cohortes";
+        const GET_DEFI_FOR_COHORTE_PROC = "get_defi_for_cohorte";
+        const GET_ALL_ATHLETES_PROC = "get_les_athletes";
 
         public function get_all_cohortes(){
            $pdo = $this->get_pdo_instance();
-           $procedure = $pdo->prepare("Call ".self::GET_ALL_COHORTES."()");
+           $procedure = $pdo->prepare("Call ".self::GET_ALL_COHORTES_PROC."()");
            $procedure->execute([
                 
            ]);
-           $lesCohortes = $procedure->fetchAll(PDO::FETCH_CLASS,"cohortesDTO");
+           $lesCohortes = $procedure->fetchAll(PDO::FETCH_CLASS,"cohorteDTO");
            return $lesCohortes;
         }
 
-        public function get_modele_for_marque($id_marque){
+        public function get_defi_for_cohorte($id_cohorte){
             $pdo = $this->get_pdo_instance();
-            $procedure = $pdo->prepare("Call ".self::GET_MODELE_FOR_MARQUE_VOITURE."(:id_marque)");
+            $procedure = $pdo->prepare("Call ".self::GET_DEFI_FOR_COHORTE_PROC."(:in_id_cohorte)");
             $procedure->execute([
-                'id_marque' => $id_marque
+                'in_id_cohorte' => $id_cohorte
            ]);
-           $modeles = $procedure->fetchAll(PDO::FETCH_CLASS,"modeleDTO");
-           return $modeles;
+           $leDefi = $procedure->fetchAll(PDO::FETCH_CLASS,"defisDTO");
+           return $leDefi;
         }
-
-        public function get_pneu_for_modele($id_modele){
+        
+        public function get_les_athletes($id_cohorte){
             $pdo = $this->get_pdo_instance();
-            $procedure = $pdo->prepare("Call ".self::GET_PNEU_FOR_MODELE."(:id_modele)");
+            $procedure = $pdo->prepare("Call ".self::GET_ALL_ATHLETES_PROC."(:in_id_cohorte)");
             $procedure->execute([
-                'id_modele' => $id_modele
+                'in_id_cohorte' => $id_cohorte
             ]);
-            $pneu = $procedure->fetchAll(PDO::FETCH_CLASS,"pneuDTO");
-            return $pneu;
+            $lesAthletes = $procedure->fetchAll(PDO::FETCH_CLASS,"athleteDTO");
+            return $lesAthletes;
         }
     }
 ?>

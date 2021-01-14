@@ -2,7 +2,8 @@
     class CohorteDTO
     {
         public $id_cohorte;
-        public $name;
+        public $nom;
+        public $km_total;
         
         
 

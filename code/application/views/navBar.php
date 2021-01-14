@@ -1,4 +1,4 @@
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #dda145;">
+  <nav class="navbar navbar-expand-lg navbar-light  sticky-top" style="background-color: #dda145;">
     <div class="container-fluid">
       <a class="navbar-brand" href="https://www.eebeauce.com/" style='height: 10%; width: 10%'>
         <div>

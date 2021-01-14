@@ -1,11 +1,14 @@
 <?php
-    class DefisDTO
+    class AthleteDTO
     {
-        public $id_defi;
+        public $id_athlete;
+        public $prenom;
         public $nom;
-        public $km_defi;
-        public $image_defi;
+        public $km;
+        public $image;
         public $id_cohorte;
+
+        
         
 
         public function __construct(){

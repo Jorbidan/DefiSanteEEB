@@ -22,13 +22,45 @@
             $this->show_les_defis();
         }
 
-        public function cohortes($id_cohorte){
+        public function cohortes(){
+            //ajax
+            header('Content-Type: application/json');
+
+            if(func_num_args() >0){
+                $id_cohorte = func_get_arg(0);
+            }else{
+                $id_cohorte = null;
+            }
+            if ($id_cohorte == null) {
+              $lesCohortes = $this->defis_modele->get_all_cohortes();
+            //var_dump($lesCohortes);
+              $response = array("lesCohortes"=>$lesCohortes);
+              echo json_encode($response);
+            }
+            else
+            {
+                $leDefi = $this->defis_modele->get_defi_for_cohorte($id_cohorte);
+                $response = array("leDefi"=>$leDefi);
+                echo json_encode($response);
+            }
+           // var_dump($response);
+        }  
+
+        public function leDefi($id_cohorte){
             //ajax
             header('Content-Type: application/json');
             $leDefi = $this->defis_modele->get_defi_for_cohorte($id_cohorte);
-            $response = array("defi"=>$leDefi);
+            $response = array("leDefi"=>$leDefi);
             echo json_encode($response);
-        }  
+        }
+
+        public function athletes($id_cohorte){
+            //ajax
+            header('Content-Type: application/json');
+            $lesAthletes = $this->defis_modele->get_les_athletes($id_cohorte);
+            $response = array("lesAthletes"=>$lesAthletes);
+            echo json_encode($response);
+        }
 
         public function show_les_defis(){
             $view = new View("defisView.php");

@@ -15,7 +15,7 @@
     <?php
         require("includeJS.php")
     ?>
-    <title>Mon site</title>
+    <title>Défi santé EEB</title>
 </head>
 
 <body class="bg-secondary text-white">
