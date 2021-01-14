@@ -10,6 +10,7 @@
         const GET_ALL_COHORTES_PROC = "get_all_cohortes";
         const GET_DEFI_FOR_COHORTE_PROC = "get_defi_for_cohorte";
         const GET_ALL_ATHLETES_PROC = "get_les_athletes";
+        const ADD_KM_ATHLETES_PROC = "add_km_athletes";
 
         public function get_all_cohortes(){
            $pdo = $this->get_pdo_instance();
@@ -40,5 +41,15 @@
             $lesAthletes = $procedure->fetchAll(PDO::FETCH_CLASS,"athleteDTO");
             return $lesAthletes;
         }
+
+        public function add_km_athletes($id_athlete, $km_ajouter){
+            $pdo = $this->get_pdo_instance();
+            $procedure = $pdo->prepare("Call ".self::ADD_KM_ATHLETES_PROC."(:in_id_athlete, :km_ajouter)");
+            $procedure->execute([
+                'in_id_athlete' => $id_athlete,
+                'km_ajouter' => $km_ajouter
+            ]);
+        }
+
     }
 ?>

@@ -68,6 +68,10 @@
             $content = $view->render($data);
             echo $this->render_template_with_content(self::DEFIS_PAGE_TITLE, $content);
         }
-
+        public function AjouterKm($id_athlete,$km){
+            //ajax
+            header('Content-Type: application/json');
+            $leDefi = $this->defis_modele->add_km_athletes($id_athlete,$km);
+        }
     }
 ?>

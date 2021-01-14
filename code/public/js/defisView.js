@@ -72,12 +72,12 @@ function AfficherDefiFromCohorte(lesDefis) {
                             '<div class="input-group mb-3">'+
                                 '<label class="input-group-text" for="dropdownAthletes">Qui êtes Vous?</label>'+
                                 '<select class="form-control" id="dropdownAthletes">'+
-                                    '<option disabled selected>Qui êtes Vous?</option>'+
+                                    
                                 '</select>'+
                             '</div>'+
                             '<div class="input-group mb-3">'+
-                                '<input type="text" class="form-control" placeholder="Entrez vos km ici" aria-label="Entrez vos km ici" aria-describedby="button_km">'+
-                                '<button class="btn btn-success" type="button" id="button_km">Button</button>'+
+                                '<input type="number" class="form-control" id="kmAjouter" placeholder="Entrez vos km ici" aria-label="Entrez vos km ici" aria-describedby="button_km">'+
+                                '<button onclick="AjouterKm()" class="btn btn-success" type="button" id="button_km">Button</button>'+
                             '</div>'+
                         '</form>'+
                     '</div>'+
@@ -113,10 +113,22 @@ function ChargerLesAthletes(idCohorte) {
 function AfficherLesAthletes(lesAthletes){
     var dropdownAthletes = $("#dropdownAthletes");
     dropdownAthletes.empty();
+    dropdownAthletes.append('<option disabled selected></option>');
     lesAthletes.forEach(athlete => {
         dropdownAthletes.append(
             "<option value='" + athlete.id_athlete + "'>" + athlete.prenom +" "+ athlete.nom + "</option>"
         );
     });
+}
+
+function AjouterKm(){
+    var kmAjouter = $("#kmAjouter").value;
+    var id = $("#dropdownAthletes").find(':selected').value;
+        return $.ajax({
+            url: "/defis/AjouterKm/" + id +','+ kmAjouter,
+            methode: "GET",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        });
 }
 

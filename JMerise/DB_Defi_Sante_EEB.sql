@@ -85,6 +85,19 @@ DELIMITER ;;
     END;;
 DELIMITER ;;
 
+DROP PROCEDURE IF EXISTS `add_km_athletes`;
+DELIMITER ;;
+	CREATE PROCEDURE add_km_athletes(
+    in in_id_athlete int,
+    km_ajouter int
+    )
+    BEGIN
+    update tbl_athlete
+    SET km = km + km_ajouter
+    WHERE id_athlete = in_id_athlete;
+    END;;
+DELIMITER ;;
+
 
 #------------------------------------------------------------
 # Entrée de donnée
