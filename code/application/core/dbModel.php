@@ -3,7 +3,7 @@
         static private $PDOInstance;
         private $host ='127.0.0.1';
         private $port ='3306';
-        private $db = 'db_CanadaRun';
+        private $db = 'Defi_sante_EEB';
         private $db_user = 'root';
         private $db_password = '';
         private $charset = 'utf8mb4';
