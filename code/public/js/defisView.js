@@ -26,7 +26,7 @@ function AfficherLesCohortes(cohortes) {
     console.log(cohortes);
 
     cohortes.forEach(cohorte => {
-        cohortesSelect.append("<option value='" + cohorte.id_cohorte + "'>" + cohorte.nom + "</option>")
+        cohortesSelect.append('<option value="' + cohorte.id_cohorte + '" data-total="'+cohorte.km_total+'">' + cohorte.nom + '</option>')
     });
 }
 
@@ -65,6 +65,9 @@ function AfficherDefiFromCohorte(lesDefis) {
                         '</div>'+
                     '</div>'+
                     '<div class="col">'+
+                        '<span>Total de l\'equipe est de : '+
+                            $("#lesCohortes").find(':selected').data('total')+
+                        ' km!'+
                         '<form>'+
                             '<div class="input-group mb-3">'+
                                 '<label class="input-group-text" for="dropdownAthletes">Qui êtes Vous?</label>'+
@@ -116,3 +119,4 @@ function AfficherLesAthletes(lesAthletes){
         );
     });
 }
+
