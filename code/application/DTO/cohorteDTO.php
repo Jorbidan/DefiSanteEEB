@@ -3,7 +3,6 @@
     {
         public $id_cohorte;
         public $nom;
-        public $km_total;
         
         
 

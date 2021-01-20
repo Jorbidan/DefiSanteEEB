@@ -34,11 +34,12 @@
         
         public function get_les_athletes($id_cohorte){
             $pdo = $this->get_pdo_instance();
+            $array_les_athletes = array('' => '' );
             $procedure = $pdo->prepare("Call ".self::GET_ALL_ATHLETES_PROC."(:in_id_cohorte)");
             $procedure->execute([
-                'in_id_cohorte' => $id_cohorte
+                'in_id_cohorte' => $id_cohorte,
             ]);
-            $lesAthletes = $procedure->fetchAll(PDO::FETCH_CLASS,"athleteDTO");
+            $lesAthletes = $procedure->fetchAll();//PDO::FETCH_CLASS,"athleteDTO"
             return $lesAthletes;
         }
 

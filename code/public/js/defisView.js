@@ -26,7 +26,7 @@ function AfficherLesCohortes(cohortes) {
     console.log(cohortes);
 
     cohortes.forEach(cohorte => {
-        cohortesSelect.append('<option value="' + cohorte.id_cohorte + '" data-total="'+cohorte.km_total+'">' + cohorte.nom + '</option>')
+        cohortesSelect.append('<option value="' + cohorte.id_cohorte + '">' + cohorte.nom + '</option>')
     });
 }
 
@@ -51,9 +51,15 @@ function AfficherDefiFromCohorte(lesDefis) {
     var defiDisplay = $("#defiDisplay");
     defiDisplay.empty();
     lesDefis.forEach(defi => {
+        var percentImage = 100 - (defi.km_cumul * 100 / defi.km_defi);
+        if (defi.image_defi == null) {
+            defi.image_defi = 'http://zone.eebeauce.com/zone/EEB_LOGO_MOBILE.png';
+            percentImage = 0;
+        }
         defiDisplay.append(
             '<div class="center" style="text-align: center">'+
-                '<h2>'+defi.nom+'</h1>'+
+                '<h2>'+defi.nom+'</h2>'+
+                '<h4> Un défi de '+defi.km_defi+' km</h4>'+
             '</div>'+
 
             '<div class="container">'+
@@ -61,12 +67,12 @@ function AfficherDefiFromCohorte(lesDefis) {
                     '<div class="col">'+
                         '<div style="position: relative; left: 0; top: 0;">'+
                             '<img class="grayscale img-fluid" src="'+ defi.image_defi +'" alt="image defi" style="position: relative; left: 0; top: 0">'+
-                            '<img class="img-fluid" src="'+ defi.image_defi +'" alt="image defi" style="position: absolute; left: 0; top: 0; clip-path: inset(0% 0% 0%  50%)">'+
+                            '<img class="img-fluid" src="'+ defi.image_defi +'" alt="image defi" style="position: absolute; left: 0; top: 0; clip-path: inset(0% 0% 0%  '+ percentImage +'%)">'+
                         '</div>'+
                     '</div>'+
                     '<div class="col">'+
-                        '<span>Total de l\'equipe est de : '+
-                            $("#lesCohortes").find(':selected').data('total')+
+                        '<span>Le total de l\'equipe est de : '+
+                            defi.km_cumul +
                         ' km!'+
                         '<form>'+
                             '<div class="input-group mb-3">'+
@@ -77,7 +83,7 @@ function AfficherDefiFromCohorte(lesDefis) {
                             '</div>'+
                             '<div class="input-group mb-3">'+
                                 '<input type="number" class="form-control" id="kmAjouter" placeholder="Entrez vos km ici" aria-label="Entrez vos km ici" aria-describedby="button_km">'+
-                                '<button onclick="AjouterKm()" class="btn btn-success" type="button" id="button_km">Button</button>'+
+                                '<button onclick="AjouterKm()" class="btn btn-success" type="button" id="button_km">Ajouter!</button>'+
                             '</div>'+
                         '</form>'+
                     '</div>'+
@@ -116,19 +122,27 @@ function AfficherLesAthletes(lesAthletes){
     dropdownAthletes.append('<option disabled selected></option>');
     lesAthletes.forEach(athlete => {
         dropdownAthletes.append(
-            "<option value='" + athlete.id_athlete + "'>" + athlete.prenom +" "+ athlete.nom + "</option>"
+            '<option value="' + athlete.id_athlete + '" data-fullname="'+ athlete.prenom +' '+ athlete.nom +'">' + athlete.prenom +' '+ athlete.nom + '</option>'
         );
     });
 }
 
 function AjouterKm(){
-    var kmAjouter = $("#kmAjouter").value;
-    var id = $("#dropdownAthletes").find(':selected').value;
+       var athlete = document.getElementById("dropdownAthletes");
+       var km = document.getElementById("kmAjouter");
+       if (confirm('Voulez-vous vraiment ajouter ' + String(km.value) + ' km a ' + athlete.options[athlete.selectedIndex].text + '?')) {
+        // Save it!
+
         return $.ajax({
-            url: "/defis/AjouterKm/" + id +','+ kmAjouter,
+            url: "/defis/AjouterKm/",
+            data: {id_athlete: athlete.value, km: km.value},
             methode: "GET",
             contentType: "application/json; charset=utf-8",
             dataType: "json"
-        });
+        }); 
+      } else {
+        // Do nothing!
+        console.log('Thing was not saved to the database.');
+      }
 }
 

@@ -5,6 +5,7 @@
         public $nom;
         public $km_defi;
         public $image_defi;
+        public $km_cumul;
         public $id_cohorte;
         
 

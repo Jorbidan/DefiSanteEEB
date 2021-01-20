@@ -5,7 +5,7 @@ echo ('
     <div class="card-body">
         <h5 class="card-title">Fonctionnement</h5>
         <p class="card-text">
-            Sélectionné votre défi grâce à l\'onglet "voire les défis" et entrez vos km parcourus selon le tableau ci-bas.
+            Sélectionné votre défi grâce à l\'onglet "voir les défis" et entrez vos km parcourus selon le tableau ci-bas.
              Dans la même page vous verrez combien de km vous et vos coéquipiers ont parcouru individuellement. Bon succès!
         </p>
     </div>

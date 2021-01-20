@@ -4,9 +4,7 @@
         public $id_athlete;
         public $prenom;
         public $nom;
-        public $km;
         public $image;
-        public $id_cohorte;
 
         
         

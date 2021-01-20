@@ -15,7 +15,7 @@
             <a class="nav-link" href="/">Accueil <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="/defis/lesDefis">Voire les défis</a>
+            <a class="nav-link" href="/defis/lesDefis">Voir les défis</a>
           </li>
         </ul>
       </div>
