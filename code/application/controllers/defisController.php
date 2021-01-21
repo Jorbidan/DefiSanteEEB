@@ -6,7 +6,7 @@
 
 
     class DefisController extends Controller{
-        const DEFIS_PAGE_TITLE = "Les Défis";
+        const DEFIS_PAGE_TITLE = "Défis santé EEB";
         const ERROR_DEFIS = "Erreur";
         private $defis_modele;
         
@@ -68,12 +68,16 @@
             $content = $view->render($data);
             echo $this->render_template_with_content(self::DEFIS_PAGE_TITLE, $content);
         }
-        public function AjouterKm($data){
+        public function AjouterKm(){
             //ajax
+            $encoded_data =  file_get_contents('php://input');
+            $data = json_decode($encoded_data);
             //var_dump($data);
-
+            $id_athlete = $data->athlete;
+            $km =  $data->km;
+            $id_cohorte = $data->cohorte;
             header('Content-Type: application/json');
-            $leDefi = $this->defis_modele->add_km_athletes($data[0],$data[1]);
+            $leDefi = $this->defis_modele->add_km_athletes($id_athlete,$km,$id_cohorte);
         }
     }
 ?>

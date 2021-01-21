@@ -1,0 +1,2 @@
+tableau de distance en dessous du btn ajouter, page accueil a enlever, 
+ajouter possibilit/ 2e image, ajouter possibilite de changer le tableau de 

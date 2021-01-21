@@ -103,12 +103,13 @@ DROP PROCEDURE IF EXISTS `add_km_athletes`;
 DELIMITER ;;
 	CREATE PROCEDURE add_km_athletes(
     in in_id_athlete int,
-    km_ajouter int
+    in km_ajouter int,
+    in in_id_cohorte int
     )
     BEGIN
-    update tbl_athlete
-    SET km = km + km_ajouter
-    WHERE id_athlete = in_id_athlete;
+    update tbl_appartenir
+    SET km_athlete = km_athlete + km_ajouter
+    WHERE id_athlete = in_id_athlete AND id_cohorte = in_id_cohorte;
     END;;
 DELIMITER ;;
 
@@ -127,10 +128,10 @@ insert into tbl_athlete(prenom, nom, image) values('Jordan','Côté','https://ee
 
 
 insert into tbl_appartenir(id_athlete, id_cohorte, km_athlete) values(1,1,360);
-insert into tbl_appartenir(id_athlete, id_cohorte, km_athlete) values(2,1,10);
+insert into tbl_appartenir(id_athlete, id_cohorte, km_athlete) values(2,1,0);
 insert into tbl_appartenir(id_athlete, id_cohorte, km_athlete) values(3,2,420);
 insert into tbl_appartenir(id_athlete, id_cohorte, km_athlete) values(4,2,70);
 
 
-insert into tbl_defi (nom, km_defi, image_defi, km_cumul, id_cohorte) values ('Traversée du Canada - aller et retour', 15642.00,'http://eeb.eebeauce.com/zone/C18/canada_rouge.png',4000, 1);
-insert into tbl_defi (nom, km_defi, km_cumul, id_cohorte) values ('Too fast too furious', 100.00, 0, 2);
+insert into tbl_defi (nom, km_defi, image_defi, km_cumul, id_cohorte) values ('Traversée du Canada - aller et retour', 15642.00,'http://eeb.eebeauce.com/zone/C18/canada_rouge.png',2000, 1);
+insert into tbl_defi (nom, km_defi, km_cumul, id_cohorte) values ('Test sans image dans la base de donnée', 100.00, 0, 2);

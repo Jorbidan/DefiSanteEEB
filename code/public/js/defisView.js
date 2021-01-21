@@ -1,6 +1,3 @@
-/*$(window).on('load', function(){​​​​ 
-    console.log("allo1");
-});*/
 $(window).on('load', function () {
     ChargerLesCohortes();
     var cohorteSelect = $("#lesCohortes");
@@ -21,7 +18,7 @@ function GetLesCohortes() {
 function AfficherLesCohortes(cohortes) {
     var cohortesSelect = $("#lesCohortes");
     cohortesSelect.empty();
-    cohortesSelect.append("<option></option>");
+    cohortesSelect.append("<option disabled selected></option>");
 
     console.log(cohortes);
 
@@ -61,7 +58,7 @@ function AfficherDefiFromCohorte(lesDefis) {
                 '<h2>'+defi.nom+'</h2>'+
                 '<h4> Un défi de '+defi.km_defi+' km</h4>'+
             '</div>'+
-
+            
             '<div class="container">'+
                 '<div class="row">'+
                     '<div class="col">'+
@@ -86,6 +83,21 @@ function AfficherDefiFromCohorte(lesDefis) {
                                 '<button onclick="AjouterKm()" class="btn btn-success" type="button" id="button_km">Ajouter!</button>'+
                             '</div>'+
                         '</form>'+
+                        '<div class="card" style="background-color:#dda145;">'+
+                            '<div class="card-body">'+
+                                '<h5 class="card-title">Tableau de distance</h5>'+
+                                    '<p class="card-text">'+
+                                        'Course: distance réelle<br>'+
+                                        'Marche: distance réelle<br>'+
+                                        'Crossfit ou entraînement au gym: 1 heure = 10 km<br>'+
+                                        'Vélo de route: 1 heure = distance / 2<br>'+
+                                        'Donc si vous faites 20 km, vous inscrivez 10 km<br>'+
+                                        'Vélo de montagne avec dénivelé: distance réelle<br>'+
+                                        'Yoga: 1 heure = 6 km<br>'+
+                                        'Sports d\'équipe: 1 heure = 8 km'+
+                                    '</p>'+
+                            '</div>'+
+                        '</div>'+
                     '</div>'+
                 '</div>'+
             '</div>'
@@ -100,6 +112,8 @@ function ChargerDefiFromCohorte(idCohorte) {
         AfficherDefiFromCohorte(response.leDefi);
     });
 }
+
+//////////////////////////////////////////////////////////////////
 
 function GetLesAthletes(idCohorte){
     return $.ajax({
@@ -127,22 +141,31 @@ function AfficherLesAthletes(lesAthletes){
     });
 }
 
-function AjouterKm(){
-       var athlete = document.getElementById("dropdownAthletes");
-       var km = document.getElementById("kmAjouter");
-       if (confirm('Voulez-vous vraiment ajouter ' + String(km.value) + ' km a ' + athlete.options[athlete.selectedIndex].text + '?')) {
-        // Save it!
+//////////////////////////////////////////////////////////////////
 
+function AjouterKm(){
+    var athlete = document.getElementById("dropdownAthletes");
+    var km = document.getElementById("kmAjouter");
+    var id_cohorte = document.getElementById("lesCohortes");
+
+    if (confirm('Voulez-vous vraiment ajouter ' + String(km.value) + ' km a ' + athlete.options[athlete.selectedIndex].text + '?')) {
+    // Save it!
+        var data = {
+            athlete: athlete.value, 
+            km: km.value,
+            cohorte: id_cohorte.value
+        };
+        ChargerDefiFromCohorte(id_cohorte.value);
         return $.ajax({
-            url: "/defis/AjouterKm/",
-            data: {id_athlete: athlete.value, km: km.value},
-            methode: "GET",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json"
+            method: "POST",
+            url: "/defis/AjouterKm",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            dataType: "JSON"
         }); 
-      } else {
-        // Do nothing!
-        console.log('Thing was not saved to the database.');
-      }
+    } else {
+    // Do nothing!
+    console.log('Thing was not saved to the database.');
+    }
 }
 

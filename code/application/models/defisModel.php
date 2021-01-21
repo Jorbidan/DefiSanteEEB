@@ -43,12 +43,13 @@
             return $lesAthletes;
         }
 
-        public function add_km_athletes($id_athlete, $km_ajouter){
+        public function add_km_athletes($id_athlete, $km_ajouter, $id_cohorte){
             $pdo = $this->get_pdo_instance();
-            $procedure = $pdo->prepare("Call ".self::ADD_KM_ATHLETES_PROC."(:in_id_athlete, :km_ajouter)");
+            $procedure = $pdo->prepare("Call ".self::ADD_KM_ATHLETES_PROC."(:in_id_athlete, :km_ajouter, :in_id_cohorte)");
             $procedure->execute([
                 'in_id_athlete' => $id_athlete,
-                'km_ajouter' => $km_ajouter
+                'km_ajouter' => $km_ajouter,
+                'in_id_cohorte' => $id_cohorte
             ]);
         }
 
