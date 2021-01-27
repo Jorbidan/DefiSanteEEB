@@ -5,7 +5,7 @@
     <div class="card-body">
         <h5 class="card-title">Fonctionnement</h5>
         <p class="card-text">
-            Sélectionné votre cohorte pour voir votre défi et entrez vos km parcourus selon le tableau ci-bas.
+            Sélectionnez votre cohorte pour voir votre défi et entrez vos km parcourus selon le tableau ci-bas.
              Vous pourrez aussi voir votre équipe et combien de Km vous avez parcouru. Bon succès!
         </p>
     </div>

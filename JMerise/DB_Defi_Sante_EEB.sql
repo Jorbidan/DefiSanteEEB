@@ -104,12 +104,25 @@ DELIMITER ;;
 	CREATE PROCEDURE add_km_athletes(
     in in_id_athlete int,
     in km_ajouter int,
-    in in_id_cohorte int
+    in in_id_cohorte float
     )
     BEGIN
     update tbl_appartenir
     SET km_athlete = km_athlete + km_ajouter
     WHERE id_athlete = in_id_athlete AND id_cohorte = in_id_cohorte;
+    END;;
+DELIMITER ;;
+
+DROP PROCEDURE IF EXISTS `cumul_km_defi`;
+DELIMITER ;;
+	CREATE PROCEDURE cumul_km_defi(
+	in km_ajouter float,
+    in in_id_defi int
+    )
+    BEGIN
+    update tbl_defi
+    SET km_cumul = km_cumul + km_ajouter
+    WHERE id_defi = in_id_defi;
     END;;
 DELIMITER ;;
 

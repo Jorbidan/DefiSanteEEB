@@ -11,6 +11,7 @@
         const GET_DEFI_FOR_COHORTE_PROC = "get_defi_for_cohorte";
         const GET_ALL_ATHLETES_PROC = "get_les_athletes";
         const ADD_KM_ATHLETES_PROC = "add_km_athletes";
+        const CUMUL_KM_DEFI_PROC = "cumul_km_defi";
 
         public function get_all_cohortes(){
            $pdo = $this->get_pdo_instance();
@@ -43,7 +44,7 @@
             return $lesAthletes;
         }
 
-        public function add_km_athletes($id_athlete, $km_ajouter, $id_cohorte){
+        public function add_km_athletes($id_athlete, $km_ajouter, $id_cohorte, $id_defi){
             $pdo = $this->get_pdo_instance();
             $procedure = $pdo->prepare("Call ".self::ADD_KM_ATHLETES_PROC."(:in_id_athlete, :km_ajouter, :in_id_cohorte)");
             $procedure->execute([
@@ -51,7 +52,11 @@
                 'km_ajouter' => $km_ajouter,
                 'in_id_cohorte' => $id_cohorte
             ]);
+            $procedure = $pdo->prepare("Call ".self::CUMUL_KM_DEFI_PROC."(:km_ajouter, :in_id_defi)");
+            $procedure->execute([
+                'km_ajouter' => $km_ajouter,
+                'in_id_defi' => $id_defi
+            ]);
         }
-
     }
 ?>

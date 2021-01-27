@@ -18,6 +18,9 @@
           <li class="nav-item active">
             <a class="nav-link" href="/defis/lesDefis">Accueil</a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/admin">Ajouter des données</a>
+          </li>
         </ul>
       </div>
   </nav>

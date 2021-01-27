@@ -76,8 +76,10 @@
             $id_athlete = $data->athlete;
             $km =  $data->km;
             $id_cohorte = $data->cohorte;
+            $id_defi = $data->defi; 
             header('Content-Type: application/json');
-            $leDefi = $this->defis_modele->add_km_athletes($id_athlete,$km,$id_cohorte);
+            $leDefi = $this->defis_modele->add_km_athletes($id_athlete,$km,$id_cohorte,$id_defi);
         }
+
     }
 ?>

@@ -5,17 +5,18 @@
 
     class HomeController extends Controller{
         
-        const HOME_TITLE = "Défi santé EEB";
+        const DEFIS_PAGE_TITLE = "Défis santé EEB";
+        const ERROR_DEFIS = "Erreur";
  
         public function __construct(){
             
         }
 
         public function show(){
-            $view = new View("accueilView.php");
+            $view = new View("defisView.php");
             $data = array();
             $content = $view->render($data);
-            echo $this->render_template_with_content(self::HOME_TITLE, $content);
+            echo $this->render_template_with_content(self::DEFIS_PAGE_TITLE, $content);
         }
     }
 ?>

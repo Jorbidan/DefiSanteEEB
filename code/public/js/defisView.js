@@ -55,7 +55,7 @@ function AfficherDefiFromCohorte(lesDefis) {
         }
         defiDisplay.append(
             '<div class="center" style="text-align: center">'+
-                '<h2>'+defi.nom+'</h2>'+
+                '<h2>'+defi.nom+'</h2>'+ '<input value="'+defi.id_defi+'" id="id_defi" type="hidden">'+
                 '<h4> Un défi de '+defi.km_defi+' km</h4>'+
             '</div>'+
             
@@ -143,17 +143,24 @@ function AfficherLesAthletes(lesAthletes){
 
 //////////////////////////////////////////////////////////////////
 
-function AjouterKm(){
+function AjouterKm(){    
     var athlete = document.getElementById("dropdownAthletes");
     var km = document.getElementById("kmAjouter");
     var id_cohorte = document.getElementById("lesCohortes");
+    var id_defi = document.getElementById("id_defi");
 
+    UpdateBD(athlete,km,id_cohorte,id_defi);
+    ChargerDefiFromCohorte(id_cohorte.value);
+    
+}
+
+function UpdateBD(athlete,km,id_cohorte,id_defi){
     if (confirm('Voulez-vous vraiment ajouter ' + String(km.value) + ' km a ' + athlete.options[athlete.selectedIndex].text + '?')) {
-    // Save it!
         var data = {
             athlete: athlete.value, 
             km: km.value,
-            cohorte: id_cohorte.value
+            cohorte: id_cohorte.value,
+            defi: id_defi.value
         };
         ChargerDefiFromCohorte(id_cohorte.value);
         return $.ajax({
@@ -168,4 +175,5 @@ function AjouterKm(){
     console.log('Thing was not saved to the database.');
     }
 }
+
 
