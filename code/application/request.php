@@ -26,7 +26,7 @@
         {   
             $url_without_query_param =  explode('?', $this->full_URL)[0];
             $explode_url = explode('/', $url_without_query_param);
-            $explode_url = array_slice($explode_url, 1);
+            $explode_url = array_slice($explode_url, 1);//au lieu du 1 mettre un 3 sr le nas (pour skiper les / necessaires)
 
             if(count($explode_url)>0 && !$this->IsNullOrEmptyString($explode_url[0])){
                 $this->controller_name = $explode_url[0];

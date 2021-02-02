@@ -1,2 +1,7 @@
 tableau de distance en dessous du btn ajouter, page accueil a enlever, 
-ajouter possibilit/ 2e image, ajouter possibilite de changer le tableau de 
+ajouter possibilite 2e image, ajouter possibilite de changer le tableau de 
+
+Ajouter sport hiver genre ski de fond raquette patin km reel
+
+ajouter les dates de debut et fin des defis
+pour le staff 1 fev jusqu'au 30 juin
